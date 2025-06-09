@@ -1,5 +1,8 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import ExpensiveComponent from "../component/MemoizCount";
+
+import SortProducts from "../component/MemoizSort";
+import MemoizMultiply from "../component/MmoizMultiply";
 function UseMemoPage(){
     
   const products= [
@@ -598,6 +601,8 @@ function UseMemoPage(){
 
                 <button onClick={() => setCount(count + 1)}>Increase Count ({count})</button>
                 <ExpensiveComponent />
+                <SortProducts />
+                <MemoizMultiply />
         </div>
     )
 }
