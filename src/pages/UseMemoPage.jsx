@@ -3,6 +3,7 @@ import ExpensiveComponent from "../component/MemoizCount";
 
 import SortProducts from "../component/MemoizSort";
 import MemoizMultiply from "../component/MmoizMultiply";
+import MemoizeCapital from "../component/MemoizeCapital";
 function UseMemoPage(){
     
   const products= [
@@ -603,6 +604,7 @@ function UseMemoPage(){
                 <ExpensiveComponent />
                 <SortProducts />
                 <MemoizMultiply />
+                <MemoizeCapital />
         </div>
     )
 }
