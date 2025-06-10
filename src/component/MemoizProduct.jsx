@@ -1,14 +1,7 @@
-import { useState, useEffect, useMemo, useRef } from "react";
-import ExpensiveComponent from "../component/MemoizCount";
-import SortProducts from "../component/MemoizSort";
-import MemoizMultiply from "../component/MmoizMultiply";
-import MemoizeCapital from "../component/MemoizeCapital";
-import MemoizForm from "../component/MemoizForm";
-import MemoizCard from "../component/MemoizeCard";
-import MemoizeProduct from "../component/MemoizProduct";
-function UseMemoPage(){
-    
-  const products= [
+import { useState,useMemo } from "react";
+
+function MemoizeProduct(){
+ const products= [
     {
       "id": 1,
       "title": "iPhone 9",
@@ -562,60 +555,51 @@ function UseMemoPage(){
       ]
     }
   ];
-  const [filteredList, setFilteredList]=useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [count, setCount] = useState(0);
 
-  const categories = useMemo(() => {
-      console.log("↪ Computing category list...");
+  let catArray=
+    useMemo(()=>{
+        return products.map((p)=>p.category)
+    }, [products]);
+    catArray=new Set(catArray);
+    catArray = [...new Set(catArray)];
 
-    const catArray = [];
-    products
-      .map((a) => a.category)
-      .forEach((element) => {
-        if (!catArray.includes(element)) catArray.push(element);
-      });
-    return catArray;
+
+ function getProducts(category){
+  const titles = useMemo(() => {
+    return products
+      .filter((p) => p.category === category)
+      .map((p) => p.title);
   }, [products]);
-
-  function filterProducts(val){
-    let result=products.filter((p)=>p.category===val);
-    setFilteredList(result);
-  }
-  
-    return(
-        <div>
-          <h2>Filter Products by Category</h2>
-
-           <select onChange={(e)=>filterProducts(e.target.value)}>
-              {categories.map((element, index) => (
-                    <option value={element} key={index}>{element}</option>
-                ))}
-                
-           </select>
-                {filteredList && 
-                <ul>
-                    {filteredList.map((element, index) => (
-                    <li key={index}>{element.title}</li>
-                ))}
-                </ul>
-
-                }
-
-                <button onClick={() => setCount(count + 1)}>Increase Count ({count})</button>
-                {/* <ExpensiveComponent />
-                <SortProducts />
-                <MemoizMultiply />
-                <MemoizeCapital />
-                <MemoizForm /> */}
-                {/* <MemoizCard />
-                <MemoizCard title={"hello world!"} content={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
-
-                <MemoizCard title={"hello world again !"} content={"Another Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
-                <MemoizCard title={"hello world!"} content={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/> */}
-                <MemoizeProduct />
-        </div>
-    )
+  return (
+     <ul>
+         {titles.map((t, index)=>{
+       return  <li key={index}>
+        
+            {t}
+        
+     </li>
+      })}
+     </ul>
+     
+  );
 }
 
-export  default UseMemoPage;
+ 
+    return(<div>
+        <ul>
+            {catArray.map((cat, index)=>{
+                return <li key={index}>
+                 <p className="title">{cat}</p> 
+                 <div id="hidden">
+                    {getProducts(`${cat}`)}
+                 </div>
+                   
+                 
+                </li>
+            })}
+            
+        </ul>
+    </div>)
+}
+
+export default MemoizeProduct;
