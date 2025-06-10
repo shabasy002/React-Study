@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import ExpensiveComponent from "../component/MemoizCount";
-
 import SortProducts from "../component/MemoizSort";
 import MemoizMultiply from "../component/MmoizMultiply";
 import MemoizeCapital from "../component/MemoizeCapital";
+import MemoizForm from "../component/MemoizForm";
+import MemoizCard from "../component/MemoizeCard";
 function UseMemoPage(){
     
   const products= [
@@ -601,10 +602,17 @@ function UseMemoPage(){
                 }
 
                 <button onClick={() => setCount(count + 1)}>Increase Count ({count})</button>
-                <ExpensiveComponent />
+                {/* <ExpensiveComponent />
                 <SortProducts />
                 <MemoizMultiply />
                 <MemoizeCapital />
+                <MemoizForm /> */}
+                <MemoizCard />
+                <MemoizCard title={"hello world!"} content={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
+
+                <MemoizCard title={"hello world again !"} content={"Another Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
+                <MemoizCard title={"hello world!"} content={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
+
         </div>
     )
 }

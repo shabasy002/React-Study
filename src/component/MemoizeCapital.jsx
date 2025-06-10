@@ -9,7 +9,9 @@ function MemoizeCapital(){
     
     console.log(Capitalized);
     return(<ul>
-
+       {Capitalized.map((name, index) => (
+        <li key={index}>{name}</li>
+      ))}
     </ul>)
 }
 
