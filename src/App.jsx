@@ -4,6 +4,7 @@ import UseEffectPage from './pages/UseEffectPage';
 import Counter from './pages/ClassComponent';
 import UseRefPage from './pages/UseRefPage';
 import UseMemoPage from './pages/UseMemoPage';
+import ProductList from './pages/ProductListing';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function App() {
@@ -32,6 +33,9 @@ function App() {
                     <li className="nav-item">
                         <Link to="/UseMemo">UseMemoPage</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link to="/ProductList">Product Listing</Link>
+                    </li>
                     
                 </ul>
             </nav>
@@ -44,6 +48,7 @@ function App() {
                     <Route path="/Counter" element={<Counter />} />
                     <Route path="/UseRef" element={<UseRefPage />} />
                     <Route path="/UseMemo" element={<UseMemoPage />} />
+                    <Route path="/ProductList" element={<ProductList />} />
                 </Routes>
             </div>
         </Router>

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 
 function Card(props){
 
     useEffect(()=>{
+       
         console.log(`Title prop changed to: ${props.title}`)
     },[props.title])
     return(
@@ -14,4 +15,4 @@ function Card(props){
     )
 }
 
-export default Card;
+export default memo(Card);
