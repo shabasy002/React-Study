@@ -12,7 +12,7 @@ function ProductList() {
 
     useEffect(() => {
          const storedCategory = localStorage.getItem('selectedValue');
-    const storedSort = localStorage.getItem('sortingFactor');
+        const storedSort = localStorage.getItem('sortingFactor');
 
     if (storedCategory) {
         setSelectedValue(storedCategory);
@@ -28,7 +28,7 @@ function ProductList() {
             .then((data) => {
                 setProducts(data.products);
                 setLoading(false);
-            })
+            }) 
             .catch((err) => {
                 console.error("Error fetching products:", err);
                 setLoading(false);
