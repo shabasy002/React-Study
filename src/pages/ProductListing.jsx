@@ -1,16 +1,27 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-
+import usefetch from "../custom-hooks/Usefetch";
 
 function ProductList() {
 
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [selectedValue, setSelectedValue]=useState("");
     const [sortingFactor, setSortingFactor]=useState("");
     const [searchText, setSearchText] = useState("");
     const searchbox=useRef("");
 
+
+    const { data, loading, error } = usefetch('https://dummyjson.com/products');
+     
+      
+      useEffect(() => {
+        if (data?.products) {
+            setProducts(data.products); // only set when ready
+        }
+        }, [data]);
+
     useEffect(() => {
+        
          const storedCategory = localStorage.getItem('selectedValue');
         const storedSort = localStorage.getItem('sortingFactor');
 
@@ -21,25 +32,24 @@ function ProductList() {
         setSortingFactor(storedSort);
     }
 
-        fetch("https://dummyjson.com/products")
-            .then(function (res) {
-                return res.json();
-            })
-            .then((data) => {
-                setProducts(data.products);
-                setLoading(false);
-            }) 
-            .catch((err) => {
-                console.error("Error fetching products:", err);
-                setLoading(false);
-            });
+        // fetch("https://dummyjson.com/products")
+        //     .then(function (res) {
+        //         return res.json();
+        //     })
+        //     .then((data) => {
+        //         setProducts(data.products);
+        //         setLoading(false);
+        //     }) 
+        //     .catch((err) => {
+        //         console.error("Error fetching products:", err);
+        //         setLoading(false);
+        //     });
             searchbox.current.focus();
     }, []);
 
 
 const filteredProducts = useMemo(() => {
   let filtered = [...products];
-
   // 1. Filter by category
   if (selectedValue) {
     filtered = filtered.filter(p => p.category === selectedValue);
@@ -94,8 +104,7 @@ const debouncedSearch = useMemo(() => {
     setSearchText(value.toLowerCase());
   }, 500); // adjust delay as needed
 }, []);
-//const matchesSearch = searchText ? p.title.toLowerCase().includes(searchText) : true;
-//console.log(localStorage.getItem('sortingFactor'));
+
 
     return (
         <>
@@ -135,6 +144,7 @@ const debouncedSearch = useMemo(() => {
         </div>
        
         <div className="product-wrap">
+            
             {filteredProducts.length>0 &&
                 filteredProducts.map(p => {
                     return (

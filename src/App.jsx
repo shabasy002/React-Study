@@ -55,7 +55,7 @@ function App() {
                     <Route path="/Useeffect" element={<UseEffectPage />} />
                     <Route path="/Counter" element={<Counter />} />
                     <Route path="/UseRef" element={<UseRefPage />} />
-                    <Route path="/UseMemo" element={<ProtectedDashboard />} />
+                    <Route path="/UseMemo" element={<UseMemoPage />} />
                     <Route path="/ProductList" element={<ProductList />} />
                 </Routes>
             </div>
