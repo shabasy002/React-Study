@@ -5,8 +5,16 @@ import Counter from './pages/ClassComponent';
 import UseRefPage from './pages/UseRefPage';
 import UseMemoPage from './pages/UseMemoPage';
 import ProductList from './pages/ProductListing';
+import withAuth from './HigherOrder/WithAuth';
+import { ProtectedDashboard } from './pages/UseMemoPage';
+import { WrappedClickCounter } from './component/ClickCounter';
+
+import {WithHoverCounter} from './component/HoverCounter'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import HoverCounter from './component/HoverCounter';
+
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -47,13 +55,14 @@ function App() {
                     <Route path="/Useeffect" element={<UseEffectPage />} />
                     <Route path="/Counter" element={<Counter />} />
                     <Route path="/UseRef" element={<UseRefPage />} />
-                    <Route path="/UseMemo" element={<UseMemoPage />} />
+                    <Route path="/UseMemo" element={<ProtectedDashboard />} />
                     <Route path="/ProductList" element={<ProductList />} />
                 </Routes>
             </div>
         </Router>
       <h1>Vite + React</h1>
-    
+    <WrappedClickCounter />
+    <WithHoverCounter />
     </>
   )
 }

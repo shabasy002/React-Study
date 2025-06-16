@@ -6,6 +6,7 @@ import MemoizeCapital from "../component/MemoizeCapital";
 import MemoizForm from "../component/MemoizForm";
 import MemoizCard from "../component/MemoizeCard";
 import MemoizeProduct from "../component/MemoizProduct";
+import withAuth from "../HigherOrder/WithAuth";
 function UseMemoPage(){
     
   const products= [
@@ -619,3 +620,5 @@ function UseMemoPage(){
 }
 
 export  default UseMemoPage;
+
+export const ProtectedDashboard = withAuth(UseMemoPage);
