@@ -1,0 +1,54 @@
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import usefetch from "../custom-hooks/Usefetch";
+import { useParams, Link } from "react-router-dom";
+import Modal from "../component/Modal";
+
+function ProductDetail(){
+    const { id } = useParams(); // 🔑 Get the ID from the route
+    const { data, loading, error } = usefetch(`https://dummyjson.com/products/${id}`);
+    const [img, setImg]=useState(null);
+    const [product, setProduct]=useState([])
+    const [showModal, setShowModal] = useState(false);
+
+    useEffect(()=>{
+       if(data){
+        setProduct(data);
+        setImg(product.thumbnail);
+       }
+    },[data])
+    //console.log(img);
+    return(
+        <div className="detail-wrap">
+            
+        
+        <>
+            <div className="thumbnails">
+                <Link to={`/ProductList/`}>Back to product listing</Link>
+                   {product.images &&
+                    product.images.map((p, index)=>{
+                        //console.log(index);
+                        return (
+                            <div className="thumb" key={index}>
+                                <img src = {p} width="120" onMouseOver={(e)=>{
+                                    setImg(e.target.src);
+                                }}/>
+                            </div>
+                        )
+                    })
+
+                   }
+            </div>
+            <div className="image" onClick={() => setShowModal(true)}>
+                <img src={img} alt={product.title} width="300" />
+                <h3>{product.title}</h3>
+            </div>
+        </>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+         <img src={img} alt={product.title} />
+      </Modal>
+            
+        </div>
+    )
+}
+
+export default ProductDetail;

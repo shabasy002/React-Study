@@ -8,7 +8,7 @@ import ProductList from './pages/ProductListing';
 import withAuth from './HigherOrder/WithAuth';
 import { ProtectedDashboard } from './pages/UseMemoPage';
 import { WrappedClickCounter } from './component/ClickCounter';
-
+import ProductDetail from './pages/ProductDetail';
 import {WithHoverCounter} from './component/HoverCounter'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -42,7 +42,7 @@ function App() {
                         <Link to="/UseMemo">UseMemoPage</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/ProductList">Product Listing</Link>
+                        <Link to="/ProductList" replace = {true}>Product Listing</Link>
                     </li>
                     
                 </ul>
@@ -57,6 +57,7 @@ function App() {
                     <Route path="/UseRef" element={<UseRefPage />} />
                     <Route path="/UseMemo" element={<UseMemoPage />} />
                     <Route path="/ProductList" element={<ProductList />} />
+                    <Route path="/productDetail/:id" element={<ProductDetail />} />
                 </Routes>
             </div>
         </Router>
