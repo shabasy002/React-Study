@@ -12,9 +12,10 @@ import ProductDetail from './pages/ProductDetail';
 import {WithHoverCounter} from './component/HoverCounter'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ParentComponent from './component/LifingState';
 import HoverCounter from './component/HoverCounter';
 
-
+import LiftStatePage from './pages/LiftStatePage';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -42,6 +43,9 @@ function App() {
                         <Link to="/UseMemo">UseMemoPage</Link>
                     </li>
                     <li className="nav-item">
+                        <Link to="/LiftStatePage">Lifting State</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link to="/ProductList" replace = {true}>Product Listing</Link>
                     </li>
                     
@@ -58,6 +62,7 @@ function App() {
                     <Route path="/UseMemo" element={<UseMemoPage />} />
                     <Route path="/ProductList" element={<ProductList />} />
                     <Route path="/productDetail/:id" element={<ProductDetail />} />
+                    <Route path="/LiftStatePage" element={<LiftStatePage />} />
                 </Routes>
             </div>
         </Router>
