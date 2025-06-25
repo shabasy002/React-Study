@@ -12,15 +12,19 @@ import { ProtectedDashboard } from './pages/UseMemoPage';
 import { WrappedClickCounter } from './component/ClickCounter';
 import ProductDetail from './pages/ProductDetail';
 import {WithHoverCounter} from './component/HoverCounter'
+import UseReducerPage from './pages/UseReducerPage';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import ParentComponent from './component/LifingState';
-import HoverCounter from './component/HoverCounter';
+
 import CartPage from './pages/Cart';
 
 import LiftStatePage from './pages/LiftStatePage';
 
 function App() {
+        const { cartItems, totalQuantity, totalAmount } = useSelector(state => state.cart);
+
+        console.log(cartItems);
+
   const [count, setCount] = useState(0)
       const count1 = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
@@ -53,9 +57,14 @@ function App() {
                     <li className="nav-item">
                         <Link to="/ProductList" >Product Listing</Link>
                     </li>
+                       <li className="nav-item">
+                        <Link to="/UseReducerPage" >UseReducerPage</Link>
+                    </li>
+                    {cartItems.length>0 &&
                     <li className="nav-item">
                         <Link to="/Cart" >Cart</Link>
                     </li>
+                     }
                     
                 </ul>
             </nav>
@@ -71,7 +80,8 @@ function App() {
                     <Route path="/ProductList" element={<ProductList />} />
                     <Route path="/productDetail/:id" element={<ProductDetail />} />
                     <Route path="/LiftStatePage" element={<LiftStatePage />} />
-                     <Route path="/Cart" element={<CartPage />} />
+                    <Route path="/Cart" element={<CartPage />} />
+                    <Route path="/UseReducerPage" element={<UseReducerPage />} />
                 </Routes>
             </div>
     </Router>

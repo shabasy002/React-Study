@@ -25,6 +25,7 @@ function ProductDetail(){
       const itemToAdd = { id: product.id, name: product.title, price: product.price };
 
     return(
+      <>
         <div className="detail-wrap">
             
         
@@ -48,22 +49,12 @@ function ProductDetail(){
             <div className="image" onClick={() => setShowModal(true)}>
                 <img src={img} alt={product.title} width="300" />
                 <h3>{product.title}</h3>
+                
             </div>
 
-            <button onClick={() => dispatch(addToCart(itemToAdd))}>Add Laptop</button>
-            <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
+         
 
-            <h4>Total Quantity: {totalQuantity}</h4>
-            <h4>Total Amount: ₹{totalAmount}</h4>
-
-      <ul>
-        {cartItems.map(item => (
-          <li key={item.id}>
-            {item.name} - ₹{item.price} × {item.quantity}
-            <button onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
-          </li>
-        ))}
-      </ul>
+     
         </>
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
          <img src={img} alt={product.title} />
@@ -71,6 +62,11 @@ function ProductDetail(){
             
         </div>
 
+          <button onClick={() => dispatch(addToCart(itemToAdd))}>Add to cart</button>
+          {cartItems.length>0 &&
+          <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
+          }
+        </>
         
     )
 }
