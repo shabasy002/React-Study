@@ -5,6 +5,8 @@ import Counter from './pages/ClassComponent';
 import UseRefPage from './pages/UseRefPage';
 import UseMemoPage from './pages/UseMemoPage';
 import ProductList from './pages/ProductListing';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement, reset } from './component/counterSlice';
 import withAuth from './HigherOrder/WithAuth';
 import { ProtectedDashboard } from './pages/UseMemoPage';
 import { WrappedClickCounter } from './component/ClickCounter';
@@ -14,11 +16,14 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ParentComponent from './component/LifingState';
 import HoverCounter from './component/HoverCounter';
+import CartPage from './pages/Cart';
 
 import LiftStatePage from './pages/LiftStatePage';
+
 function App() {
   const [count, setCount] = useState(0)
-
+      const count1 = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
   return (
     <>
     <Router>
@@ -46,7 +51,10 @@ function App() {
                         <Link to="/LiftStatePage">Lifting State</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/ProductList" replace = {true}>Product Listing</Link>
+                        <Link to="/ProductList" >Product Listing</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Cart" >Cart</Link>
                     </li>
                     
                 </ul>
@@ -63,12 +71,20 @@ function App() {
                     <Route path="/ProductList" element={<ProductList />} />
                     <Route path="/productDetail/:id" element={<ProductDetail />} />
                     <Route path="/LiftStatePage" element={<LiftStatePage />} />
+                     <Route path="/Cart" element={<CartPage />} />
                 </Routes>
             </div>
-        </Router>
+    </Router>
       <h1>Vite + React</h1>
     <WrappedClickCounter />
     <WithHoverCounter />
+
+       <div>
+      <h1>Count: {count1}</h1>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <button onClick={() => dispatch(reset())}>Reset</button>
+    </div>
     </>
   )
 }
