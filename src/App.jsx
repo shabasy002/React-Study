@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import UsestatePage from './pages/UseStatePage';
 import UseEffectPage from './pages/UseEffectPage';
 import Counter from './pages/ClassComponent';
@@ -10,7 +10,10 @@ import { increment, decrement, reset } from './component/counterSlice';
 import withAuth from './HigherOrder/WithAuth';
 import { ProtectedDashboard } from './pages/UseMemoPage';
 import { WrappedClickCounter } from './component/ClickCounter';
-import ProductDetail from './pages/ProductDetail';
+//import ProductDetail from './pages/ProductDetail';
+
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
+
 import {WithHoverCounter} from './component/HoverCounter'
 import UseReducerPage from './pages/UseReducerPage';
 import './App.css'
@@ -78,7 +81,9 @@ function App() {
                     <Route path="/UseRef" element={<UseRefPage />} />
                     <Route path="/UseMemo" element={<UseMemoPage />} />
                     <Route path="/ProductList" element={<ProductList />} />
-                    <Route path="/productDetail/:id" element={<ProductDetail />} />
+                    <Route path="/productDetail/:id" element={  <Suspense fallback={<div>Loading...</div>}>
+      <ProductDetail />
+    </Suspense>} />
                     <Route path="/LiftStatePage" element={<LiftStatePage />} />
                     <Route path="/Cart" element={<CartPage />} />
                     <Route path="/UseReducerPage" element={<UseReducerPage />} />

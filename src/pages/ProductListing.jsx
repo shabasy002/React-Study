@@ -127,7 +127,7 @@ function ProductList() {
             <div className="product" key={p.id}>
               <h5>Rating: {p.rating}</h5>
               <Link to={`/productDetail/${p.id}`}>
-                <img src={p.thumbnail} alt={p.title} />
+                <img src={p.thumbnail} alt={p.title} loading="lazy"/>
               </Link>
              
               <h3>{p.title}</h3>
